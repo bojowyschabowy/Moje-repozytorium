@@ -1,3 +1,5 @@
+//komentarz 7
+
 program Zadanie_6;
 
 const h=12;
