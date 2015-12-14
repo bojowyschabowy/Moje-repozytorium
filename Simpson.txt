@@ -1,3 +1,5 @@
+//komentarz 9
+
 #include <stdio.h>
 
 int i=1;
