@@ -1,0 +1,231 @@
+program Sortowanie;
+
+uses Crt, SysUtils,DateUtils;
+
+const
+    ZAKRES=50;
+
+type
+    tab=Array[0..ZAKRES] of Integer;
+
+var
+    tablica: tab;
+    wynik_szybkie: tab;
+    D1, D2: TDateTime;
+
+
+procedure wypelnij(var tablica: tab);
+var
+    i: Integer;
+begin
+    for i:=1 to ZAKRES do
+    begin
+        tablica[i]:=Random(100);
+    end;
+end;
+
+procedure zamiana(i, j: Integer; var tablica: tab);
+var
+    a: Integer;
+begin
+    a:=tablica[j];
+    tablica[j]:=tablica[i];
+    tablica[i]:=a
+end;
+
+procedure pokaz(tablica: tab);
+var
+    i: Integer;
+begin
+    for i:=1 to ZAKRES do
+    begin
+        Write(tablica[i], ' ');
+    end;
+    WriteLn;
+    WriteLn;
+end;
+
+procedure babelkowe(const tablica: tab);
+var
+    i, j: Integer;
+    zmiana: Boolean = TRUE;
+    posortowana: tab;
+begin
+    posortowana:=tablica;
+    for i:=1 to ZAKRES-1 do
+    begin
+        if zmiana=FALSE then
+        begin
+            break;
+        end
+        else
+        begin
+            zmiana:=FALSE;
+            for j:=1 to ZAKRES-i do
+            begin
+                if posortowana[j]>posortowana[j+1] then
+                begin
+                    zamiana(j, j+1, posortowana);
+                    zmiana:=TRUE;
+                end;
+            end;
+        end;
+    end;
+    WriteLn('Po sortowaniu babelkowym: ');
+    pokaz(posortowana);
+end;
+
+procedure wstawianie(const tablica: tab);
+var
+    i, j: Integer;
+    element: Integer;
+    posortowana: tab;
+begin
+    posortowana:=tablica;
+    for i:=1 to ZAKRES do
+    begin
+        element:=posortowana[i];
+        j:=i;
+        while (j>0) And (posortowana[j-1]>element) do
+        begin
+            posortowana[j]:=posortowana[j-1];
+            j:=j-1;
+        end;
+        posortowana[j]:=element;
+    end;
+    WriteLn('Po sortowaniu przez wstawianie: ');
+    pokaz(posortowana);
+end;
+
+procedure wybor(const tablica: tab);
+var
+    i, j: Integer;
+    min: Integer;
+    posortowana: tab;
+begin
+    posortowana:=tablica;
+    for i:=1 to ZAKRES-1 do
+    begin
+        min:=i;
+        for j:=i+1 to ZAKRES do
+        begin
+            if posortowana[j]<posortowana[min] then
+            begin
+                min:=j;
+            end;
+        end;
+        if min<>i then
+        begin
+            zamiana(i, min, posortowana);
+        end;
+    end;
+    WriteLn('Po sortowaniu przez wybieranie: ');
+    pokaz(posortowana);
+end;
+
+procedure kopcowanie(const tablica: tab);
+var
+    posortowana: tab;
+    i, j, k, l, m : integer;
+begin
+    posortowana:=tablica;
+    for i:=2 to ZAKRES do
+    begin
+        j:=i;
+        k:=(j div 2);
+        m:=posortowana[i];
+        while (k>0) and (posortowana[k]<m) do
+        begin
+            posortowana[j]:=posortowana[k];
+            j:=k;
+            k:=(j div 2);
+        end;
+        posortowana[j]:=m;
+    end;
+    for i:=ZAKRES downto 2 do
+    begin
+        m:=posortowana[1];
+        posortowana[1]:=posortowana[i];
+        posortowana[i]:=m;
+        j:=1;
+        k:=2;
+        while k<i do
+        begin
+            if (k+1<i) and (posortowana[k+1]>posortowana[k]) then
+            begin
+                l:=k+1;
+            end
+            else
+            begin
+                l:=k;
+            end;
+            if posortowana[l]<=posortowana[j] then
+            begin
+                break;
+            end;
+            m:=posortowana[j];
+            posortowana[j]:=posortowana[l];
+            posortowana[l]:=m;
+            j:=l;
+            k:=2*j;
+        end;
+    end;
+    WriteLn('Po sortowaniu przez kopcowanie');
+    pokaz(posortowana);
+end;
+
+procedure szybkie(var tablica: tab; lewy, prawy: Integer);
+var
+    i, j, piwot: Integer;
+begin
+    i:=(lewy+prawy) div 2;
+    piwot:=tablica[i];
+    tablica[i]:=tablica[prawy];
+    j:=lewy;
+    for i:=lewy to prawy-1 do
+    begin
+        if tablica[i]<piwot then
+        begin
+            zamiana(i, j, tablica);
+            j:=j+1;
+        end;
+    end;
+    tablica[prawy]:=tablica[j];
+    tablica[j]:=piwot;
+    if lewy<j-1 then
+    begin
+        szybkie(tablica, lewy, j-1);
+    end;
+    if j+1<prawy then
+    begin
+        szybkie(tablica, j+1, prawy);
+    end;
+end;
+
+begin
+    Randomize;
+
+    wypelnij(tablica);
+    WriteLn('Wylosowana tablica: ');
+    pokaz(tablica);
+
+    //D1:=Now;
+
+    babelkowe(tablica);
+
+    wstawianie(tablica);
+
+    wybor(tablica);
+
+    kopcowanie(tablica);
+
+    wynik_szybkie:=tablica;
+    szybkie(wynik_szybkie, 0, ZAKRES);
+    writeln('Po sortowaniu szybkim:');
+    pokaz(wynik_szybkie);
+
+    //D2:=Now;
+    //WriteLn('Czas: ', MilliSecondsBetween(D1, D2));
+
+    ReadLn;
+end.

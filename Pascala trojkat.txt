@@ -1,0 +1,55 @@
+program Zadanie_6;
+
+const h=12;
+
+function f(n: Integer; m: Integer): Integer;
+begin
+  if ((n=m) Or (m=0)) then
+  begin
+    f:=1;
+  end
+  else
+  begin
+    if ((m=1) Or (m=n-1)) then
+    begin
+      f:=n;
+    end
+    else
+    begin
+      f:=((f(n-1, m-1))+(f(n-1, m)));
+    end;
+  end;
+end;
+
+procedure odstep(o: Integer);
+var
+  i: Integer;
+  c: Char = ' ';
+begin
+  for i:=2 to o do
+  begin
+    Write(c:3);
+  end;
+end;
+
+procedure rysuj(h: Integer);
+var
+  n: Integer;
+  m: Integer;
+begin
+  for n:=0 to h do
+  begin
+    odstep(h-n+1);
+    for m:=0 to n do
+    begin
+      Write(f(n, m):6);
+    end;
+    WriteLn;
+    WriteLn;
+  end;
+end;
+
+begin
+  rysuj(h);
+  ReadLn;
+end.

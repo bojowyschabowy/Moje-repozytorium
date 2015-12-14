@@ -1,0 +1,45 @@
+#include <stdio.h>
+
+int i=1;
+
+double f(double x)
+{
+    /* (x^3) */
+    return ((x*x));
+}
+
+double simpson(double a, double b, double delta)
+{
+    double h=b-a;
+    double c;
+    double s, s1, s2;
+    s=h*(f(a)+4*f(a/2+b/2)+f(b))/6;
+    c=(a+(b-a)/2);
+    s1=h*(f(a)+4*f(a/2+c/2)+f(c))/6;
+    s2=h*(f(c)+4*f(c/2+b/2)+f(b))/6;
+    if (((s1+s2)-s)<=delta)
+    {
+        return s;
+    }
+    else
+    {
+        return (simpson(a, c, delta/i)+simpson(c, b, delta/i));
+        i++;
+    }
+}
+
+int main()
+{
+    int a, b;
+    double delta;
+    printf("Podaj lewa granice przedzialu: ");
+    scanf("%d", &a);
+    printf("Podaj prawa granice przedzialu: ");
+    scanf("%d", &b);
+    printf("Podaj maksymalny blad: ");
+    scanf("%lf", &delta);
+
+    printf("Powierzchnia pola pod wykresem jest rowna: %lf", simpson(a, b, delta));
+
+    return 0;
+}
