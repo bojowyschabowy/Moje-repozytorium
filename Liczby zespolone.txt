@@ -17,3 +17,5 @@ int main()
     printf("Argument: %lf pi rad\n", asin(arg)/M_PI); /* asin - funkcja odwrotna do sinusa */
     return 0;
 }
+
+//komentarz 4
