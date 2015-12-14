@@ -1,0 +1,87 @@
+#include <stdio.h>
+
+char plansza[9]={'.', '.', '.', '.', '.', '.', '.', '.', '.'};
+int koniec_gry=1;
+
+void ruch_gracza_kolo ()
+{
+    int n;
+    do
+    {
+        printf ("RUCH GRACZA 1: Podaj gdzie chcesz postawic znak o: ");
+        scanf ("%d", &n);
+    }
+    while (plansza[n]!='.');
+    plansza[n]='o';
+};
+
+void ruch_gracza_krzyz ()
+{
+    int m;
+    do
+    {
+        printf ("RUCH GRACZA 2: Podaj gdzie chcesz postawic znak x: ");
+        scanf ("%d", &m);
+    }
+    while (plansza[m]!='.');
+    plansza[m]='x';
+};
+
+void czy_wygrana ()
+{
+    int x=360; /* suma 3 krzyzykow */
+    int o=333; /* suma 3 kolek */
+    int i, j; /* i - licznik wierszy, j- licznik kolumn */
+    int k=0; /* odlicza po 3 kolumny na wiersz i przechodzi wiersz nizej */
+    int p1, p2, w1, w2, w3, k1, k2, k3; /* kolejno przekatne, wiersze i kolumny */
+
+    p1=plansza[0]+plansza[4]+plansza[8];
+    p2=plansza[2]+plansza[4]+plansza[6];
+    w1=plansza[0]+plansza[1]+plansza[2];
+    w2=plansza[3]+plansza[4]+plansza[5];
+    w3=plansza[6]+plansza[7]+plansza[8];
+    k1=plansza[0]+plansza[3]+plansza[6];
+    k2=plansza[1]+plansza[4]+plansza[7];
+    k3=plansza[2]+plansza[5]+plansza[8];
+
+    printf ("\n\n");
+    for (i=0; i<3; i++)
+    {
+        for (j=k; j<(k+3); j++)
+        {
+        printf ("%c ", plansza[j]);
+    }
+        k=k+3;
+        printf ("\n");
+    }
+    printf ("\n\n");
+
+    if ((p1==x) || (p2==x) || (w1==x) || (w2==x) || (w3==x) || (k1==x) || (k2==x) || (k3==x))
+    {
+        printf ("Gracz X wygral!!!\n\n");
+        koniec_gry=0;
+        printf ("KONIEC GRY\n");
+    }
+    if ((p1==o) || (p2==o) || (w1==o) || (w2==o) || (w3==o) || (k1==o) || (k2==o) || (k3==o))
+    {
+        printf ("Gracz O wygral!!!\n\n");
+        koniec_gry=0;
+        printf ("KONIEC GRY\n");
+    }
+}
+
+int main()
+{
+    while (koniec_gry!=0)
+    {
+        ruch_gracza_kolo();
+        czy_wygrana();
+        if (koniec_gry==0)
+        {
+            break;
+        }
+        ruch_gracza_krzyz();
+        czy_wygrana();
+    }
+return 0;
+};
