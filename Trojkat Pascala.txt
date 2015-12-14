@@ -53,3 +53,5 @@ begin
   rysuj(h);
   ReadLn;
 end.
+
+//komentarz 
