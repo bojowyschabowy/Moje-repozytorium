@@ -57,3 +57,5 @@
 -  WriteLn('Czas: ', godz_k-godz_p, ':', min_k-min_p, ':', sek_k-sek_p, ':', sek100_k-sek100_p);
 -  ReadLn;
 -end.
+
+//komentarz 1
