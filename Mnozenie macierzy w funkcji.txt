@@ -1,0 +1,41 @@
+#include <stdio.h>
+#define n 4
+#define m 5
+#define p 3
+
+void funkcja(int lew[], int pra[], int wynik[])
+{
+    int i, j, k;
+    for (i=0; i<n; i++)
+    {
+        for (j=0; j<p; j++)
+        {
+            wynik[j+i*p]=0;
+            for (k=0; k<m; k++)
+            {
+                wynik[j+i*p]=wynik[j+i*p]+lew[k+i*m]*pra[j+k*p];
+            }
+        }
+    }
+}
+
+int main()
+{
+    int lew[n][m]={3,3,3,3,3,2,2,2,2,2,1,1,1,1,1,4,4,4,4,4};
+    int pra[m][p]={1,1,1,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1};
+    int wynik[n][p];
+    int i, j;
+
+    funkcja(lew, pra, wynik);
+
+    for (i=0; i<n; i++)
+    {
+        for (j=0; j<p; j++)
+        {
+            printf ("%3d ", wynik[i][j]);
+        }
+        printf ("\n");
+    }
+
+    return 0;
+}
