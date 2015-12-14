@@ -1,0 +1,108 @@
+#include <stdio.h>
+
+int main()
+{
+    int m; /* numer miesiaca (zakres 1-12) */
+    int d; /* nimer pierwszego dnia danego miesiaca (zakres 0-6) */
+    int y; /* licznik miejsc w kanendarzu (zaczynajac od 0) */
+    int i;
+    int j;
+    int k;
+    int l=1;
+    int n;
+    int h;
+    int g;
+
+    printf ("Podaj numer miesiaca: ");
+    scanf ("%d", &m);
+    while (m<1 || m>12)
+    {
+                printf ("Podaj poprawny numer miesiaca! \nPodaj numer miesiaca: ");
+                scanf ("%d", &m);
+    };
+
+    printf ("Podaj numer dnia: ");
+    scanf ("%d", &d);
+    while (d<0 || d>6)
+    {
+                printf ("Podaj poprawny numer dnia! \nPodaj numer dnia: ");
+                scanf ("%d", &d);
+    };
+
+    printf ("\nMiesiac %d\n", m);
+    printf ("|Ni|Po|Wt|Sr|Cz|Pt|So|\n");
+    y=d;
+    if (y<=4)
+    {
+                for (k=0; k<y; k++) /* uzupelnia puste miejsca przed pierwszym dniem miesiaca */
+                {
+                            printf ("|  ");
+                };
+
+                for (n=k; n<=6; n++) /* uzupelnianie w liczby pierwszego wiersza */
+                {
+                            printf ("|%2d", l);
+                            l++;
+                };
+                printf ("|\n");
+
+                for (i=1; i<=3; i++) /* wypelnianie liczbami srodkowych wierszy */
+                {
+                            for (j=0; j<=6; j++)
+                            {
+                                        printf ("|%2d", l);
+                                        l++;
+                            }
+                            printf ("|\n");
+                };
+
+                for (h=0; h<=(2+y); h++) /* uzupelnianie w liczby ostatniego wiersza */
+                {
+                            printf ("|%2d", l);
+                            l++;
+                };
+
+                for (g=0; g<=(3-y); g++) /* uzupelnia puste miejsca na koncu ostniego wiersza */
+                {
+                            printf ("|  ");
+                };
+                printf ("|\n");
+    }
+    else
+    {
+                for (k=0; k<y; k++) /* uzupelnia puste miejsca przed pierwszym dniem miesiaca */
+                {
+                            printf ("|  ");
+                };
+
+                for (n=k; n<=6; n++) /* uzupelnianie w liczby pierwszego wiersza */
+                {
+                            printf ("|%2d", l);
+                            l++;
+                };
+                printf ("|\n");
+
+                for (i=1; i<=4; i++) /* wypelnianie liczbami srodkowych wierszy */
+                {
+                            for (j=0; j<=6; j++)
+                            {
+                                        printf ("|%2d", l);
+                                        l++;
+                            }
+                            printf ("|\n");
+                };
+
+                for (h=0; h<=(-5+y); h++) /* uzupelnianie w liczby ostatniego wiersza */
+                {
+                            printf ("|%2d", l);
+                            l++;
+                };
+
+                for (g=0; g<=(10-y); g++) /* uzupelnia puste miejsca na koncu ostniego wiersza */
+                {
+                            printf ("|  ");
+                };
+                printf ("|\n");
+    };
+    return 0;
+};

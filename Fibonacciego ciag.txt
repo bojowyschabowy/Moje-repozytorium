@@ -1,0 +1,59 @@
+program Zadanie_5;
+
+uses DOS, SysUtils,DateUtils;
+
+var
+  n: Byte;
+  godz_p, min_p, sek_p, sek100_p: Word;
+  godz_k, min_k, sek_k, sek100_k: Word;
+  D1,D2 : TDateTime;
+
+function f_rek(n: Byte): LongWord;
+begin
+  if (n=0) then
+    begin
+      f_rek:=0;
+    end
+  else
+    begin
+    if (n=1) then
+      begin
+        f_rek:=1;
+      end
+    else
+      begin
+        f_rek:=f_rek(n-1)+f_rek(n-2);
+      end;
+    end;
+end;
+
+function f_ite(n: Byte): LongWord;
+var
+  a, b, c: LongWord;
+  i: Integer;
+begin
+  a:=0;
+  b:=1;
+  c:=a+b;
+  for i:=3 to n do
+  begin
+    a:=b;
+    b:=c;
+    c:=a+b;
+  end;
+  f_ite:=c;
+end;
+
+begin
+  n:=35;
+  GetTime(godz_p, min_p, sek_p, sek100_p);
+  D1:=Now;
+  WriteLn(n, '-ty wyraz ciagu F. : ', f_rek(n));
+
+  D2:=Now;
+
+  writeln('czas: ', MilliSecondsBetween(D1, D2));
+  GetTime(godz_k, min_k, sek_k, sek100_k);
+  WriteLn('Czas: ', godz_k-godz_p, ':', min_k-min_p, ':', sek_k-sek_p, ':', sek100_k-sek100_p);
+  ReadLn;
+end.
