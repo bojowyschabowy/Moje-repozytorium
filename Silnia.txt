@@ -222,3 +222,5 @@ begin
 
     ReadLn;
 end.
+
+//komentarz 7
