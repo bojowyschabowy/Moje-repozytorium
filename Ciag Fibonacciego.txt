@@ -1,3 +1,5 @@
+//komentarz 1
+
 -program Zadanie_5;
 -
 -uses DOS, SysUtils,DateUtils;
