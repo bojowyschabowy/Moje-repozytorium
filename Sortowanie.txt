@@ -1,3 +1,5 @@
+//komentarz 10
+
 program Sortowanie;
 
 uses Crt, SysUtils,DateUtils;
