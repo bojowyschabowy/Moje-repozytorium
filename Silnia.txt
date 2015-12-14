@@ -1,3 +1,5 @@
+//komentarz 8
+
 program Sortowanie;
 
 uses Crt;
