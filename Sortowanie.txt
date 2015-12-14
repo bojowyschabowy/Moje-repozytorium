@@ -229,3 +229,5 @@ begin
 
     ReadLn;
 end.
+
+//komentarz 9
