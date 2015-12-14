@@ -1,0 +1,91 @@
+program Zadanie_2;
+ 
+uses crt;
+ 
+Function bezwzg(liczba: Integer): Integer;
+begin
+  if (liczba<0) then
+  begin
+       liczba:=-liczba;
+  end;
+  bezwzg:=liczba;
+end;
+ 
+var
+  w, k: Integer; {w i k - wiersze i kolumny planszy}
+  i: Integer; {i-odleglosc od srodka planszy}
+  zakres: Integer; {zakres - limit powiekszania i pomnijszania kwadrata}
+  p: Integer; {ilosc powiekszen i pomniejszen}
+  w_ost, w_sro: Integer;
+  k_ost, k_sro: Integer;
+ 
+const
+  opoznienie=500;
+ 
+begin
+ 
+  Write ('Podaj liczbe wierszy: ');
+  Readln (w_ost);
+  Write ('Podaj liczbe kolumn: ');
+  Readln (k_ost);
+  w_sro:=trunc(w_ost/2)+1;
+  k_sro:=trunc(k_ost/2)+1;
+  if (w_sro>=k_sro) then
+  begin
+       zakres:=k_sro-1;
+  end
+  else
+  begin
+       zakres:=w_sro-1;
+  end;
+  clrscr;
+ 
+  for p:=1 to 2 do
+  begin
+       {powiekszanie}
+       for i:=0 to zakres do
+       begin
+            for w:=1 to w_ost do
+            begin
+                 for k:=1 to k_ost do
+                 begin
+                      if (((bezwzg(w_sro-w)<=i) And (bezwzg(k_sro-k)=i)) Or ((bezwzg(w_sro-w)=i) And (bezwzg(k_sro-k)<=i))) then
+                      begin
+                           write ('x');
+                           end
+                           else
+                           begin
+                           write ('o');
+                           end;
+                 end;
+                 writeln;
+            end;
+            delay(opoznienie);
+            clrscr;
+       end;
+ 
+       {pomniejszanie}
+       for i:=(zakres-1) downto 1 do
+       begin
+            for w:=1 to w_ost do
+            begin
+                 for k:=1 to k_ost do
+                 begin
+                      if (((bezwzg(w_sro-w)<=i) And (bezwzg(k_sro-k)=i)) Or ((bezwzg(w_sro-w)=i) And (bezwzg(k_sro-k)<=i))) then
+                      begin
+                           write ('x');
+                      end
+                      else
+                      begin
+                           write ('o');
+                      end;
+                 end;
+                 writeln;
+            end;
+            delay(opoznienie);
+            clrscr;
+       end;
+  end;
+ 
+  readln;
+end.
