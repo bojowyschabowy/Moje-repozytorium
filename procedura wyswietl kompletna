@@ -1,0 +1,139 @@
+    procedure Wyswietl();
+
+        procedure RysujPrymitywy();
+        Begin
+            al_rect(BM_Bufor, JedWie-1, JedWie-1, 11*JedWie, 21*JedWie, al_makecol (255, 255, 255));
+            al_rect(BM_Bufor, 12*JedWie-1, 1*JedWie-1, 19*JedWie, 6*JedWie, al_makecol (255, 255, 255));
+            al_rect(BM_Bufor, 12*JedWie-1, 7*JedWie-1, 19*JedWie, 11*JedWie, al_makecol (255, 255, 255));
+            al_rect(BM_Bufor, 12*JedWie-1, 12*JedWie-1, 19*JedWie, 16*JedWie, al_makecol (255, 255, 255));
+            al_rect(BM_Bufor, 12*JedWie-1, 17*JedWie-1, 19*JedWie, 21*JedWie, al_makecol (255, 255, 255));
+            al_line(BM_Bufor, 12*JedWie, 8*JedWie, 19*JedWie, 8*JedWie, al_makecol (255, 255, 255));
+            al_line(BM_Bufor, 12*JedWie, 13*JedWie, 19*JedWie, 13*JedWie, al_makecol (255, 255, 255));
+            al_line(BM_Bufor, 12*JedWie, 18*JedWie, 19*JedWie, 18*JedWie, al_makecol (255, 255, 255));
+        End;
+
+        procedure RysujKlocki();
+        var
+            BM_o_klocek: BMPtr = NIL;
+            os_x, os_y: Integer;
+            w, k, i: Integer;
+        Begin
+            BM_o_klocek:=al_load_bmp('obiekty/o_klocek.bmp', NIL);
+            os_x:=JedWie;
+            os_y:=JedWie;
+            for w:=1 to 20 do
+            begin
+                for k:=1 to 10 do
+                begin
+                    if Plansza[w, k].Zajety=True then
+                    begin
+                       case Plansza[w, k].Typ of
+                               1: al_blit(BM_o_klocek, BM_Bufor, JedWie*0, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                               2: al_blit(BM_o_klocek, BM_Bufor, JedWie*1, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                               3: al_blit(BM_o_klocek, BM_Bufor, JedWie*2, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                               4: al_blit(BM_o_klocek, BM_Bufor, JedWie*3, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                               5: al_blit(BM_o_klocek, BM_Bufor, JedWie*4, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                               6: al_blit(BM_o_klocek, BM_Bufor, JedWie*5, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                               7: al_blit(BM_o_klocek, BM_Bufor, JedWie*6, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                       end;
+                    end;
+                end;
+            end;
+            begin
+                for i:=1 to 4 do
+                begin
+                    if KlocekAktualny.Wiersz[i]>0 then
+                    begin
+                       case KlocekAktualny.Typ of
+                               1: al_blit(BM_o_klocek, BM_Bufor, JedWie*0, 0, os_x+JedWie*(KlocekAktualny.Kolumna[i]-1), os_y+JedWie*(KlocekAktualny.Wiersz[i]-1), JedWie, JedWie);
+                               2: al_blit(BM_o_klocek, BM_Bufor, JedWie*1, 0, os_x+JedWie*(KlocekAktualny.Kolumna[i]-1), os_y+JedWie*(KlocekAktualny.Wiersz[i]-1), JedWie, JedWie);
+                               3: al_blit(BM_o_klocek, BM_Bufor, JedWie*2, 0, os_x+JedWie*(KlocekAktualny.Kolumna[i]-1), os_y+JedWie*(KlocekAktualny.Wiersz[i]-1), JedWie, JedWie);
+                               4: al_blit(BM_o_klocek, BM_Bufor, JedWie*3, 0, os_x+JedWie*(KlocekAktualny.Kolumna[i]-1), os_y+JedWie*(KlocekAktualny.Wiersz[i]-1), JedWie, JedWie);
+                               5: al_blit(BM_o_klocek, BM_Bufor, JedWie*4, 0, os_x+JedWie*(KlocekAktualny.Kolumna[i]-1), os_y+JedWie*(KlocekAktualny.Wiersz[i]-1), JedWie, JedWie);
+                               6: al_blit(BM_o_klocek, BM_Bufor, JedWie*5, 0, os_x+JedWie*(KlocekAktualny.Kolumna[i]-1), os_y+JedWie*(KlocekAktualny.Wiersz[i]-1), JedWie, JedWie);
+                               7: al_blit(BM_o_klocek, BM_Bufor, JedWie*6, 0, os_x+JedWie*(KlocekAktualny.Kolumna[i]-1), os_y+JedWie*(KlocekAktualny.Wiersz[i]-1), JedWie, JedWie);
+                       end;
+                    end;
+                end;
+            end;
+            os_x:=13*JedWie+15;
+            os_y:=2*JedWie;
+            for w:=1 to 4 do
+            begin
+                for k:=1 to 4 do
+                begin
+                    if KlocekNastepnyPodglad[w, k].Zajety=True then
+                    begin
+                        case KlocekNastepnyPodglad[w, k].Typ of
+                                1: al_blit(BM_o_klocek, BM_Bufor, JedWie*0, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                                2: al_blit(BM_o_klocek, BM_Bufor, JedWie*1, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                                3: al_blit(BM_o_klocek, BM_Bufor, JedWie*2, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                                4: al_blit(BM_o_klocek, BM_Bufor, JedWie*3, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                                5: al_blit(BM_o_klocek, BM_Bufor, JedWie*4, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                                6: al_blit(BM_o_klocek, BM_Bufor, JedWie*5, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                                7: al_blit(BM_o_klocek, BM_Bufor, JedWie*6, 0, os_x+JedWie*(k-1), os_y+JedWie*(w-1), JedWie, JedWie);
+                        end;
+                    end;
+                end;
+            end;
+        al_destroy_bitmap(BM_o_klocek);
+        End;
+
+        procedure RysujNapisy();
+        var
+            BM_t_poziom: BMPtr = NIL;
+            BM_t_pozostalo: BMPtr = NIL;
+            BM_t_wynik: BMPtr = NIL;
+        Begin
+            BM_t_poziom:=al_load_bmp('napisy/t_poziom.bmp', NIL);
+            BM_t_pozostalo:=al_load_bmp('napisy/t_pozostalo.bmp', NIL);
+            BM_t_wynik:=al_load_bmp('napisy/t_wynik.bmp', NIL);
+
+            al_blit(BM_t_poziom, BM_Bufor, 0, 0, 12*JedWie+1, 7*JedWie+2, 229, 29);
+            al_blit(BM_t_pozostalo, BM_Bufor, 0, 0, 12*JedWie+1, 12*JedWie+2, 229, 29);
+            al_blit(BM_t_wynik, BM_Bufor, 0, 0, 12*JedWie+1, 17*JedWie+1, 229, 29);
+
+            al_destroy_bitmap(BM_t_poziom);
+            al_destroy_bitmap(BM_t_pozostalo);
+            al_destroy_bitmap(BM_t_wynik);
+        End;
+
+        procedure RysujLiczby();
+
+            procedure RysujCyfry(liczba: String; os_x, os_y: Integer);
+            const
+                CyfraSzerokosc = 24;
+            var
+                BM_t_cyfry_30: BMPtr = NIL;
+                i: Integer;
+            Begin
+                BM_t_cyfry_30:=al_load_bmp('napisy/t_cyfry_30.bmp', NIL);
+                case Length(liczba) of
+                        1: os_x:=os_x+15;
+                        2: os_x:=os_x;
+                        3: os_x:=os_x-15;
+                end;
+                for i:=1 to Length(liczba) do
+                begin
+                    case liczba[i] of
+                            '0': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*0, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '1': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*1, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '2': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*2, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '3': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*3, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '4': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*4, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '5': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*5, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '6': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*6, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '7': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*7, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '8': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*8, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                            '9': al_blit(BM_t_cyfry_30, BM_Bufor, CyfraSzerokosc*9, 0, os_x+i*CyfraSzerokosc, os_y, CyfraSzerokosc, JedWie);
+                    end;
+                end;
+                al_destroy_bitmap(BM_t_cyfry_30);
+            End;
+
+        Begin
+            RysujCyfry(IntToStr(Poziom), 14*JedWie, 9*JedWie);
+            RysujCyfry(IntToStr(Pozostalo), 14*JedWie, 14*JedWie);
+            RysujCyfry(IntToStr(Wynik), 14*JedWie, 19*JedWie);
+        End;
+    
