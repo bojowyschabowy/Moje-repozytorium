@@ -136,4 +136,13 @@
             RysujCyfry(IntToStr(Pozostalo), 14*JedWie, 14*JedWie);
             RysujCyfry(IntToStr(Wynik), 14*JedWie, 19*JedWie);
         End;
-    
+
+    Begin
+        al_clear_to_color(BM_Bufor, al_makecol (0, 0, 0));
+        RysujPrymitywy();
+        RysujKlocki();
+        RysujNapisy();
+        RysujLiczby();
+        al_vsync;
+        al_blit(BM_Bufor, al_screen, 0, 0, 0, 0, SzerokoscOkna, WysokoscOkna);
+    End;
